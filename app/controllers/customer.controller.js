@@ -57,44 +57,44 @@ exports.findOne = (req, res) => {
 // UPDATE a Customer
 exports.update = (req, res) => {
     // Find customer and update it
-    Customer.findByIdAndUpdate(req.body._id, req.body, {new: true})
+    Customer.findByIdAndUpdate(req.body.id, req.body, {new: true})
     .then(customer => {
         if(!customer) {
             return res.status(404).json({
-                msg: "Customer not found with id " + req.params.customerId
+                msg: "Customer not found with id " + req.params.id
             });
         }
         res.json(customer);
     }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).json({
-                msg: "Customer not found with id " + req.params.customerId
+                msg: "Customer not found with id " + req.params.id
             });                
         }
         return res.status(500).json({
-            msg: "Error updating customer with id " + req.params.customerId
+            msg: "Error updating customer with id " + req.params.id
         });
     });
 };
  
 // DELETE a Customer
 exports.delete = (req, res) => {
-    Customer.findByIdAndRemove(req.params.customerId)
+    Customer.findByIdAndRemove(req.params.id)
     .then(customer => {
         if(!customer) {
             return res.status(404).json({
-                msg: "Customer not found with id " + req.params.customerId
+                msg: "Customer not found with id " + req.params.id
             });
         }
         res.json({msg: "Customer deleted successfully!"});
     }).catch(err => {
         if(err.kind === 'ObjectId' || err.name === 'NotFound') {
             return res.status(404).json({
-                msg: "Customer not found with id " + req.params.customerId
+                msg: "Customer not found with id " + req.params.id
             });                
         }
         return res.status(500).json({
-            msg: "Could not delete customer with id " + req.params.customerId
+            msg: "Could not delete customer with id " + req.params.id
         });
     });
 };
