@@ -8,12 +8,12 @@ module.exports = function(app) {
     app.get('/api/customers', customers.findAll);
 
     // RETRIEVE A SINGLE CUSTOMER BY ID
-    app.get('/api/customers/:id', customers.findOne);
+    app.get('/api/customers/:customerid', customers.findOne);
 
     // UPDATE A CUSTOMER WITH ID
-    app.put('/api/customers/:id', customers.update);
+    app.put('/api/customers/:customerid', customers.update);
 
     // DELETE A CUSTOMER WITH ID
-    app.delete('/api/customers/:id', customers.delete);
+    app.delete('/api/customers/:customerid', customers.delete);
 
 }
