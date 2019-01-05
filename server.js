@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 const dbConfig = require('./app/config/mongodb.config');
 const mongoose = require('mongoose');
 const Customer = require('./app/models/customer.model')
+// const Survey = require('./app/models/survey.model')
 mongoose.Promise = global.Promise;
 
 
@@ -31,6 +32,22 @@ mongoose.connect(dbConfig.url)
     process.exit();
 })
 
+mongoose.connect(dbConfig.url_survey)
+.then(() => {
+    console.log('Successfully connected to MongoDB survey data');
+    // Survey.remove({}, function(err) {
+    //     if (err){
+    //         console.log(err);
+    //         process.exist();
+    //     }
+    //     console.log('Survey collection removed');
+    //     // initializeSurveyData();
+    // })
+}).catch(err => {
+    console.log('Could not connect to MongoDB survey data');
+    process.exit();
+})
+
 // const cors = require('cors')
 // const corsOptions = {
 //   origin: 'http://localhost:4200',
@@ -42,6 +59,7 @@ mongoose.connect(dbConfig.url)
 
 // CREATE SERVER
 require('./app/routes/customer.routes.js')(app);
+require('./app/routes/surveys.routes')(app);
 var server = app.listen(8081, function () {
     console.log('server: ', server.address());
     var host = server.address().address;
