@@ -48,13 +48,13 @@ mongoose.connect(dbConfig.url_survey)
     process.exit();
 })
 
-// const cors = require('cors')
-// const corsOptions = {
-//   origin: 'http://localhost:4200',
-//   optionsSuccessStatus: 200
-// }
+const cors = require('cors');
+const corsOptions = {
+  origin: 'http://localhost:4200',
+  optionsSuccessStatus: 200
+}
  
-// app.use(cors(corsOptions))
+app.use(cors(corsOptions))
 
 
 // CREATE SERVER
